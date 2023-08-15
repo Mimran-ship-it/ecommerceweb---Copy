@@ -4,7 +4,10 @@ import { NextResponse } from 'next/server';
 
 
 export async function GET(req){
-    await connectToDatabase()
+   try{ await connectToDatabase()
 let orders=await Order.find()
-    return NextResponse.json(orders)
+    return NextResponse.json(orders)}
+    catch(error){
+        return NextResponse.json({ error: 'An error occurred while fetching data.' }, 200);
+    }
     }
