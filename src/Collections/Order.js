@@ -13,8 +13,10 @@ const orderSchema = new mongoose.Schema({
   
   
 },{timestamps:true});
-
+async function func(){
 await connectToDatabase()
 mongoose.models={}
+}
+func()
 let Order = mongoose.model('Order',orderSchema);
 export default Order;

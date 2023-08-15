@@ -6,7 +6,10 @@ email:{type:'String', required:true,unique:true},
 password:{type:'String', required:true},
 
 })
-connectToDatabase()
-mongoose.models={}
-const Signup=mongoose.model('Signup',signupSchema)
+async function func(){
+    await connectToDatabase()
+    mongoose.models={}
+}
+func()
+let Signup = mongoose.model('Signup',orderSchema);
 export default Signup

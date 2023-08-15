@@ -11,11 +11,10 @@ const productSchema = new mongoose.Schema({
   category: { type: String, required: true },
   image: { type: String, required: true },
 },{timestamps:true});
-await connectToDatabase()
-mongoose.models={}
-productSchema.index({ name: 1 }, { unique: false }); // Make 'name' index non-unique
-productSchema.index({ slug: 1 }, { unique: false }); // Make 'slug' index non-unique
-productSchema.index({ quantity: 1 }, { unique: false }); // Make 'slug' index non-unique
-
-let Product = mongoose.model('Product',productSchema);
+async function func(){
+  await connectToDatabase()
+  mongoose.models={}
+}
+func()
+let Product = mongoose.model('Product',orderSchema);
 export default Product;
