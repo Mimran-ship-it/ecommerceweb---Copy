@@ -2,8 +2,8 @@ import connecttodatabase from '../../../db/connection'
 import Product from '../../../Collections/Product'
 import { NextResponse } from 'next/server';
 
-connecttodatabase()
 export async function GET(){
+ await connecttodatabase()
   
   const data = await Product.find();
     let datareq={}
