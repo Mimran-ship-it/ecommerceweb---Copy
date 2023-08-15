@@ -1,5 +1,6 @@
 
 import mongoose from "mongoose";
+import connectToDatabase from "@/db/connection";
 const orderSchema = new mongoose.Schema({
   name: { type: String, required:true },
   Lastname: { type: String, required:true },
@@ -12,6 +13,8 @@ const orderSchema = new mongoose.Schema({
   
   
 },{timestamps:true});
+
+await connectToDatabase()
 mongoose.models={}
 let Order = mongoose.model('Order',orderSchema);
 export default Order;

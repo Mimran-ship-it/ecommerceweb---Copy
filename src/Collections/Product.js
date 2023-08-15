@@ -1,4 +1,5 @@
 import mongoose ,{model} from "mongoose";
+import connectToDatabase from "@/db/connection";
 const productSchema = new mongoose.Schema({
   name: { type: String, required:true },
   quantity: { type: Number , default: 1 },
@@ -10,6 +11,7 @@ const productSchema = new mongoose.Schema({
   category: { type: String, required: true },
   image: { type: String, required: true },
 },{timestamps:true});
+await connectToDatabase()
 mongoose.models={}
 productSchema.index({ name: 1 }, { unique: false }); // Make 'name' index non-unique
 productSchema.index({ slug: 1 }, { unique: false }); // Make 'slug' index non-unique
