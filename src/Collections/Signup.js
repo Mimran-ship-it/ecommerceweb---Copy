@@ -11,5 +11,5 @@ async function func(){
     mongoose.models={}
 }
 func()
-let Signup = mongoose.model('Signup',orderSchema);
+let Signup = mongoose.model('Signup',signupSchema);
 export default Signup

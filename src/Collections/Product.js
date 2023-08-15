@@ -16,5 +16,5 @@ async function func(){
   mongoose.models={}
 }
 func()
-let Product = mongoose.model('Product',orderSchema);
+let Product = mongoose.model('Product',productSchema);
 export default Product;
