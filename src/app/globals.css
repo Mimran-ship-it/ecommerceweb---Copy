@@ -2,26 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+*{
+  box-sizing: border-box;
+}
+/* For WebKit-based browsers */
+/* Change the width and color to your desired style */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Change the background color of the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Change the color of the scrollbar handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: #f1f1f1;
+}
+/* For WebKit-based browsers */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* For Firefox */
+/* Change the width and color to your desired style */
+html {
+  scrollbar-width: thin;
+}
+
+/* Change the color of the scrollbar handle (thumb) in Firefox */
+html {
+  scrollbar-color:#111111 #f1f1f1;
 }
