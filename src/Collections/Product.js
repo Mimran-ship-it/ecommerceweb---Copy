@@ -1,5 +1,4 @@
 import mongoose ,{model} from "mongoose";
-import connectToDatabase from "@/db/connection";
 const productSchema = new mongoose.Schema({
   name: { type: String, required:true },
   quantity: { type: Number , default: 1 },
@@ -11,10 +10,7 @@ const productSchema = new mongoose.Schema({
   category: { type: String, required: true },
   image: { type: String, required: true },
 },{timestamps:true});
-async function func(){
-  await connectToDatabase()
+
   mongoose.models={}
-}
-func()
 let Product = mongoose.model('Product',productSchema);
 export default Product;
