@@ -5,27 +5,9 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     await connecttodatabase();
-    
-    async function retryQueryWithTimeout(queryFunction, maxRetries, retryDelay) {
-      let retries = 0;
-      while (retries < maxRetries) {
-        try {
-          return await queryFunction();
-        } catch (error) {
-          console.error('Query error, retrying...', error);
-          retries++;
-          await new Promise(resolve => setTimeout(resolve, retryDelay));
-        }
-      }
-      throw new Error('Max retries exceeded.');
-    }
-    
-    const maxRetries = 3;
-    const retryDelay = 1000; // 1 second
-    
-    const datas = await retryQueryWithTimeout(Product.find.bind(Product), maxRetries, retryDelay);
-    
+    const datas = await Product.find();
 
+    
 
     const datareq = {};
 
