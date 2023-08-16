@@ -43,7 +43,7 @@ const email=searchParams.get('email')
      if( result.success){
       setconfirm(true)
       setTimeout(() => {
-        router.push(`${process.env.NEXT_PUBLIC_URL}/Signin`)
+        router.push(`/Signin`)
       }, 1000);
      }
 

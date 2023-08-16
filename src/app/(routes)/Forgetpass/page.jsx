@@ -37,7 +37,7 @@ export default function Page() {
 setcheck(true)
 setinvalidemail(false) 
 setTimeout(() => {
-  router.push(`${process.env.NEXT_PUBLIC_URL}reset?email=${email}`)  
+  router.push(`/reset?email=${email}`)  
 }, 1000);
 
     }else{setinvalidemail(true)

@@ -18,7 +18,7 @@ export default function Page() {
   const searchParams = useSearchParams();
   const search = searchParams.get('_id');
 
-  const { data: globaldata, error } = useSWR(`http://192.168.10.6:3000/api`, fetcher);
+  const { data: globaldata, error } = useSWR(`${process.env.NEXT_PUBLIC_URL}`, fetcher);
   const [Data, setData] = useState([]);
   useEffect(() => {
     if (globaldata) {
