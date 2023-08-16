@@ -4,9 +4,9 @@ import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
 import { useCartContext } from '../../../hooks/CartContext'
 const fetcher = async () => {
-
+ 
   const response = await fetch(`/api/Orderpage`, {
-    next: { revalidate: 0 }
+    next: { revalidate: 1000 }
   });
   const data = await response.json();
   return data;
