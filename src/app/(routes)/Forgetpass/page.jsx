@@ -31,7 +31,7 @@ export default function Page() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    }) 
+    })  
     let response=await fetchdata.json()
     if (response.success){
 setcheck(true)

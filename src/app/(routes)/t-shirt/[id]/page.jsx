@@ -7,7 +7,7 @@ import { useCartContext } from "../../../../hooks/CartContext";
 import useSWR from 'swr'
 const fetcher = async () => {
   const response = await fetch(`/api/getproduts`, {
-    next: { revalidate: 1000 }
+    next: { revalidate: 0 }
   });
   const data = await response.json();
   return data;

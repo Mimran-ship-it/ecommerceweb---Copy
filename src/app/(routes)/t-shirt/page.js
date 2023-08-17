@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {useScroll,motion} from "framer-motion"
 const fetcher = async () => {
   const response = await fetch(`/api/Products`, {
-    next: { revalidate: 1000 }
+    next: { revalidate: 0 }
   });
   const data = await response.json();
   return data;

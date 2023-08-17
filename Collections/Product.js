@@ -9,9 +9,11 @@ const productSchema = new mongoose.Schema({
   desc: { type: String },
   category: { type: String, required: true },
   image: { type: String, required: true },
-});
+},{timestamps:true});
+mongoose.models={}
+productSchema.index({ name: 1 }, { unique: false }); // Make 'name' index non-unique
+productSchema.index({ slug: 1 }, { unique: false }); // Make 'slug' index non-unique
+productSchema.index({ quantity: 1 }, { unique: false }); // Make 'slug' index non-unique
 
-  mongoose.models={}
 let Product = mongoose.model('Product',productSchema);
-console.log(Product.find())
-export default Product; 
+export default Product;

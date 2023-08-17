@@ -11,9 +11,7 @@ const orderSchema = new mongoose.Schema({
   price:{type:Number,required:true},
   
   
-});
+},{timestamps:true});
 mongoose.models={}
-
-
 let Order = mongoose.model('Order',orderSchema);
 export default Order;
