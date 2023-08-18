@@ -78,7 +78,7 @@ const data={name,email,password}
       </div>
 
       <div>
-        <button type="submit" onClick={ submit} className="flex w-full justify-center rounded-md bg-orange-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400">Sign in</button>
+        <button type="submit" onClick={ submit} className="flex w-full justify-center rounded-md bg-orange-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400">Sign up</button>
       </div>
       {check&&<p className='text-sm text-green-500   '>succesfully signed in</p>}
       {check2&&<p className='text-sm text-red-500   '>This Email already exist </p>}
