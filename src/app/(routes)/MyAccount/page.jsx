@@ -16,7 +16,8 @@ export default  function Page() {
     console.log(reqdata)
 
 return (
-    <motion.div transition={{ delay: .1,stiffness: 200  }} initial={{ opacity: 0, scale:0  }}  animate={{ x: 0, opacity: 1, scale: 1}} className='flex flex-col items-center justify-center min-h-[100vh]'>
+   
+    <motion.div transition={{ delay: .1,duration:.5,stiffness: 200  }} initial={{ opacity: 0, scale:0 ,x:'100rem' }}  animate={{ x: 0, opacity: 1, scale: 1}} className='flex flex-col items-center justify-center min-h-[100vh]'>
     <h1 className='my-10 sm:text-3xl text-2xl font-mono underline '>YOUR PREVIOUS ORDERS</h1>
 {Loggedin?<div className=' '>
 
@@ -38,9 +39,6 @@ return (
 </div>
 :<></>
 } 
-
-
-
 
     </motion.div>
   )

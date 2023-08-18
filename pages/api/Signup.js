@@ -1,28 +1,26 @@
-import connectToDatabase from "../../middleware/connection";
+import connectToDatabase from "../../src/db/connection";
 const bcrypt=require("bcrypt")
-import Signup from "../../Collections/Signup";
+import Signup from "../../src/Collections/Signup";
+import {  NextResponse } from 'next/server';
 
-const handler=async (req, res)=> {
-  if (req.method === "POST") 
-  {
+connectToDatabase()
+
+
+export async function handler(req){
     try {
+      let body=await req.json()
       const p = new Signup({
-        name: req.body.name,
-        email: req.body.email,
-        password: bcrypt.hashSync(req.body.password,10),
+        name: body.name,
+        email: body.email,
+        password: bcrypt.hashSync(body.password,10),
       });
 
       await p.save();
 
-      res.status(200).json({success:true});
+    return  NextResponse.json({success:true});
     } catch (error) {
     //   console.error("Error saving product:", error);
-      res.status(500).json({ok:false });
+     return NextResponse.json({ok:false });
     }
-  } else {
-    res.status(404).json({  });
-  }
+  
 }
-
-
-export default  connectToDatabase(handler)

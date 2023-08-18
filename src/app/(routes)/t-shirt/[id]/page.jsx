@@ -20,7 +20,7 @@ function Page({ params }) {
   const router = useRouter()
   const { addToCart, buynow } = useCartContext()
   const [select, setselect] = useState(null)
-  const [color, setcolor] = useState('')
+  const [color, setcolor] = useState('defaultSize')
   const [checkCart, setcheckCart] = useState(false)
   const [Image, setImage] = useState('')
   const [initialSize, setinitialSize] = useState('')
@@ -70,9 +70,9 @@ function Page({ params }) {
   
 
   //.....................
-console.log('blala',fetchdata.datareq)
+// console.log('blala',fetchdata.datareq)
   return (
-    <motion.div transition={{ delay: .1,stiffness: 200  }}  initial={{ opacity: 0, scale: 0.5 }}  animate={{ x: 0, opacity: 1, scale: 1 }}>
+    <motion.div transition={{ delay: .1,stiffness: 200  }} initial={{ opacity: 0, scale: 0.5 }}  animate={{ x: 0, opacity: 1, scale: 1 }}>
       {keys.map((ele) => {
         
 
@@ -127,14 +127,12 @@ console.log('blala',fetchdata.datareq)
                 <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                   <div className="flex">
                   {Object.keys(fetchdata.datareq[ele].size).map((size) => {
-                      return size == select && <div key={Math.random()}>
-                      {fetchdata.datareq[ele].size[size].map((color)=>{return <button  key={Math.random()} value={color} className= ' border px-1 rounded-lg shadow-2xl hover:bg-slate-300 ml-1 border-black sm:text-base text-sm mb-1' onClick={(e) => {  setImage(fetchdata.datareq[ele].image[e.target.value]); setcolor(e.target.value)
+                      return size == select &&Array.isArray(fetchdata.datareq[ele].size[size])&& <div key={Math.random()}>
+                      {fetchdata.datareq[ele].size[size].map((color)=>{return <button  key={Math.random()} value={color} className= '  text-sm  shadow-2xl hover:bg-slate-300 ml-1 border appearance-none border-gray-300 m-1 p-1' onClick={(e) => {  setImage(fetchdata.datareq[ele].image[e.target.value]); setcolor(e.target.value)
                                             
-                       }}>{color}</button>})
+                       }}>{color}</button>})}
+                        
                        
-                       }
-                       
-                       {color==''&&<div className='text-xs text-red-500 mt-1'>Select color!</div>} 
                       </div >
 
                     })
