@@ -11,7 +11,6 @@ const [email, setemail] = useState(null)
 const [password, setpassword] = useState(null) 
 const [check, setcheck] = useState(false) 
 const [check2, setcheck2] = useState(false) 
-const router=useRouter()
 const {Loggedin}=useCartContext()
 console.log(Loggedin)
 function handlechange(e){
@@ -20,11 +19,11 @@ function handlechange(e){
  if(e.target.name=='password'){setpassword(e.target.value)}
   setcheck2(false)
 } 
+const router=useRouter()
 
 function submit(e){
   e.preventDefault()
 const data={name,email,password}
-const router=useRouter()
 
   fetch(`api/Signup`,{
     method: 'POST',
