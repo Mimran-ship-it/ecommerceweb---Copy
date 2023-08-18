@@ -24,6 +24,7 @@ function handlechange(e){
 function submit(e){
   e.preventDefault()
 const data={name,email,password}
+const router=useRouter()
 
   fetch(`api/Signup`,{
     method: 'POST',
@@ -33,6 +34,9 @@ const data={name,email,password}
     body: JSON.stringify(data),
   }).then((res)=>{return res.json()}).then((res)=>{setcheck(res.success)
   setcheck2(!res.success)
+  setTimeout(() => {
+    router.push('/Signin')
+  }, 1000);
 
 })
   
