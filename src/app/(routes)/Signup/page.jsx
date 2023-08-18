@@ -33,10 +33,11 @@ const data={name,email,password}
     body: JSON.stringify(data),
   }).then((res)=>{return res.json()}).then((res)=>{setcheck(res.success)
   setcheck2(!res.success)
-  setTimeout(() => {
-    router.push('/Signin')
-  }, 1000);
-
+  if(res.success){
+    setTimeout(() => {
+      router.push('/Signin')
+    }, 1000);
+  }
 })
   
 }
