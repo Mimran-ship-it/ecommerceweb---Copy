@@ -31,7 +31,7 @@ export default function Home() {
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setRandom(() => Math.floor(Math.random() * key.current.length));
-    }, 6000);
+    }, 3000);
 
     return () => {
       // Clear the interval when the component unmounts or when the dependency changes
