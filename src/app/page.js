@@ -4,6 +4,9 @@ import { useInView } from 'react-hook-inview'
 import useSWR from 'swr'
 import Link from "next/link";
 import { useState,useRef,useEffect } from "react";
+import Head from "next/head";
+
+
 
 
 const fetcheddata=async ()=>{
@@ -26,32 +29,34 @@ export default function Home() {
   }
 
   const [ref, inView] = useInView();
-  console.log(inView);
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       setRandom(() => Math.floor(Math.random() * key.current.length));
     }, 3000);
-
+ console.log('mounted')
     return () => {
       // Clear the interval when the component unmounts or when the dependency changes
       clearInterval(intervalRef.current);
+      console.log('unmounted')
     };
   }, []); // Empty dependency array to ensure the effect runs only once
-
+// console.log('random',random)
 
 
   
     
   return (
     <motion.div initial={{ opacity: 0, x: 200 }} transition={{ delay: .1, stiffness: 200 }} animate={{ x: 0, opacity: 1, scale: 1 }} className='overflow-x-hidden mt-2 '>
-
+<Head>
+        <title>My page title</title>
+      </Head>
       <div className="sm:flex  sm:flex-row flex-col  flex md:h-screen max-h-fit items-center justify-center  overflow-hidden -z-10">
         <div className="md:w-3/2 lg:w-1/2 sm:1/2 w-screen flex flex-col justify-center  items-center mt-5">
           <h1 className="lg:text-6xl md:text-5xl text-4xl text-[#F95709] text-center  font-thin mx-2"> &ldquo;𝙴𝚕𝚎𝚟𝚊𝚝𝚎 𝚈𝚘𝚞𝚛 𝚂𝚝𝚢𝚕𝚎&rdquo;</h1>
-          <h1 className="font-sans text-center lg:text-2xl sm:text-lg font-light pt-2 text-gray-600 mx-4 w-10/12">   Discover Maani-Wear&rsquo;s Trendsetting T-Shirts and Hoodies!</h1>
+          <h1 className="font-sans text-center lg:text-2xl sm:text-lg font-light pt-2 text-gray-600 mx-4 w-10/12">   Discover Maani-Wear&rsquo;s Trendsetting Bedsheets in Pakistan!</h1>
           <p className="font-sans text-base font-light w-9/12 pt-5 text-justify text-black">
-            Welcome to Maani-Wear, your ultimate destination for premium t-shirts and hoodies that effortlessly blend style and comfort. We believe that fashion is not just about making a statement but also embracing individuality. Step into a world where each design is a work of art, meticulously crafted to reflect your unique personality and passions. Whether you&apos;re looking for a laid-back casual look or an eye-catching conversation starter, our diverse collection has something for everyone.
+          Elevate your bedroom décor with the finest bedsheets in Pakistan. Our exquisite collection of bedsheets offers a harmonious blend of comfort, style, and quality craftsmanship. Explore a diverse range of options that cater to various preferences, from vibrant colors to captivating patterns. Each bedsheets is designed to transform your sleeping space into a sanctuary of relaxation and elegance. Embrace a luxurious sleep experience night after night with our high-quality bedsheets that ensure utmost comfort and durability. Discover the perfect complement for your bedroom and indulge in a restful slumber like never before.
           </p>
           <div className="btn flex mt-5">
             <button className=" mt-0 text-white bg-[#F95402] border-0 py-1 sm:py-2 sm:mx-2 mx-3  px-3  focus:outline-none hover:bg-red-600 rounded sm:text-base text-sm" >Clear Cart</button>
@@ -65,10 +70,10 @@ export default function Home() {
       </div>
 
 
-      <div  className='mt-10 box-border' >
+      <div  className=' box-border' >
         <section ref={ref} className="text-gray-600 body-font">
           {inView&& <motion.div initial={{ opacity: 0, x: 200 }} transition={{ duration:1, stiffness: 200 }} animate={{ x: 0, opacity: 1, scale: 1 }}  className="container px-5 py-24 mx-auto">
-            {fetchdata&&key.current.length!=0&& <div className="border p-4 justify-center items-center shadow-2xl flex sm:flex-row flex-col w-full sm:w-9/12 h-96 m-auto box-border"><motion.div whileHover={{
+            {fetchdata&&key.current.length!=0&& <div className="border p-4 justify-center items-center shadow-2xl bg-gray-50 flex sm:flex-row flex-col w-full sm:w-9/12 h-96 m-auto box-border"><motion.div whileHover={{
   scale: 1.03,
   transition: {
     duration: .2
