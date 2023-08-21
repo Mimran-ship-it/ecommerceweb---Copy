@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import React from 'react'
 import { useCartContext } from "../../../../hooks/CartContext";
 import useSWR from 'swr'
+import Image from 'next/image';
 const fetcher = async () => {
   const response = await fetch(`/api/getproduts`, {
     next: { revalidate: 0 }
@@ -22,7 +23,7 @@ function Page({ params }) {
   const [select, setselect] = useState(null)
   const [color, setcolor] = useState('defaultSize')
   const [checkCart, setcheckCart] = useState(false)
-  const [Image, setImage] = useState('')
+  const [images, setimages] = useState('')
   const [initialSize, setinitialSize] = useState('')
   const [initialColor, setinitialColor] = useState('')
 
@@ -51,7 +52,7 @@ function Page({ params }) {
     if (params.id == fetchdata.datareq[ele].slug) {
   
     console.log('color',initialColor)
-    setImage(fetchdata.datareq[ele].image[initialColor]);
+    setimages(fetchdata.datareq[ele].image[initialColor]);
 
     setselect(initialSize);
     setcolor(initialColor);  }})},[initialColor,initialSize])
@@ -82,7 +83,7 @@ function Page({ params }) {
          
           <div className="container px-5 py-24 mx-auto">
             <div className="lg:w-4/5 mx-auto flex flex-wrap">
-             {Image!='' &&<img  alt="ecommerce" className=" lg:w-1/4 w-full lg:h-auto h-64 object-contain object-center rounded" src={Image} />}
+             {images!='' && <Image width={300} height={300} alt="ecommerce" className=" lg:w-1/4 w-full lg:h-auto h-64 object-contain object-center rounded" src={images} />}
               <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                 <h2 className="text-sm title-font text-gray-500 tracking-widest">𝓜𝓪𝓪𝓷𝓲-𝔀𝓮𝓪𝓻</h2>
                 <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{fetchdata.datareq[ele].name}/{select}</h1>
@@ -128,7 +129,7 @@ function Page({ params }) {
                   <div className="flex">
                   {Object.keys(fetchdata.datareq[ele].size).map((size) => {
                       return size == select &&Array.isArray(fetchdata.datareq[ele].size[size])&& <div key={Math.random()}>
-                      {fetchdata.datareq[ele].size[size].map((color)=>{return <button  key={Math.random()} value={color} className= '  text-sm  shadow-2xl hover:bg-slate-300 ml-1 border appearance-none border-gray-300 m-1 p-1' onClick={(e) => {  setImage(fetchdata.datareq[ele].image[e.target.value]); setcolor(e.target.value)
+                      {fetchdata.datareq[ele].size[size].map((color)=>{return <button  key={Math.random()} value={color} className= '  text-sm  shadow-2xl hover:bg-slate-300 ml-1 border appearance-none border-gray-300 m-1 p-1' onClick={(e) => {  setimages(fetchdata.datareq[ele].image[e.target.value]); setcolor(e.target.value)
                                             
                        }}>{color}</button>})}
                         
@@ -163,14 +164,14 @@ function Page({ params }) {
                   <span className="title-font font-medium sm:text-2xl text-base text-gray-900">{fetchdata.datareq[ele].price}.00</span>
                   {checkCart && <button onClick={() => {
                     router.push(`/Checkout`)
-                    return buynow(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, Image, select, color)
+                    return buynow(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, images, select, color)
                   }} className={"mt-0 text-white bg-orange-400 border-0 sm:py-2 sm:mx-6 mx-3  px-3  focus:outline-none sm:text-sm text-xs  hover:bg-orange-500 rounded"} >Buy now</button>}
                   {!checkCart && <button onClick={() => {
                     router.push(`/Checkout`)
-                    return buynow(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, Image, select, color)
+                    return buynow(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, images, select, color)
                   }} disabled className={"bg-gray-300 text-white px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed ms-4 sm:text-sm text-xs "} >Buy now</button>}
-                  {!checkCart && <button disabled onClick={() => { return addToCart(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, Image, select, color) }} className={"bg-gray-300 text-white sm:py-2 sm:mx-6 mx-3 sm:text-sm text-xs  px-3  rounded-md disabled:opacity-50 disabled:cursor-not-allowed"}>Add to cart</button>}
-                  {checkCart && <button onClick={() => { return addToCart(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, Image, select, color) }} className="mt-0 sm:text-sm text-xs text-white bg-indigo-500 border-0 sm:py-1 sm:mx-4 mx-2 sm:px-3  px-5  focus:outline-none hover:bg-indigo-600 rounded sm:text-base text-xs">Add to cart</button>}
+                  {!checkCart && <button disabled onClick={() => { return addToCart(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, images, select, color) }} className={"bg-gray-300 text-white sm:py-2 sm:mx-6 mx-3 sm:text-sm text-xs  px-3  rounded-md disabled:opacity-50 disabled:cursor-not-allowed"}>Add to cart</button>}
+                  {checkCart && <button onClick={() => { return addToCart(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, images, select, color) }} className="mt-0 sm:text-sm text-xs text-white bg-indigo-500 border-0 sm:py-1 sm:mx-4 mx-2 sm:px-3  px-5  focus:outline-none hover:bg-indigo-600 rounded sm:text-base text-xs">Add to cart</button>}
                   <button className="rounded-full w-10 h-10 bg-gray-200 sm:py-2 sm:mx-6 mx-3  px-3 border-0 inline-flex sm:text-sm text-xs items-center justify-center text-gray-500  sm:text-base text-xs">
                     <svg fill="currentColor" strokeLinecap="round" strokeinejoin="round" className="w-5 h-5" viewBox="0 0 24 24">
                       <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>

@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import Link from "next/link";
 import { useState,useRef,useEffect } from "react";
 import Head from "next/head";
+import Image from "next/image";
 
 
 
@@ -65,7 +66,7 @@ export default function Home() {
           </div>
         </div>
         <div className='flex justify-center items-center  sm:mt-0 mt-5  sm:w-1/2 w-screen sm:h-screen h-fit   overflow-x-hidden '>
-          <img src="/cover.png" alt="" className='z-10 sm:w-auto  text-center rounded-full sm:h-auto h-64 md:h-64 lg:h-96 block object-contain  ' />
+          <Image width={300} height={300}  src="/cover.png" alt="bedsheet" className='z-10 sm:w-auto w-auto  text-center rounded-full sm:h-auto h-64 md:h-64 lg:h-96 block object-contain  ' />
         </div>
       </div>
 
@@ -78,7 +79,7 @@ export default function Home() {
   transition: {
     duration: .2
   }
-}}><Link href={`/${fetchdata.datareq[key.current[random]].category}`}><img className="w-56 sm:h-80 h-56 object-contain me-4" src={fetchdata.datareq[key.current[random]].image} alt="" /></Link></motion.div>
+}}><Link href={`/${fetchdata.datareq[key.current[random]].category}`}><Image width={300} height={300} className="w-56 sm:h-80 h-56 object-contain me-4" src={`${fetchdata.datareq[key.current[random]].image}`} alt="bedsheet" /></Link></motion.div>
             <div>
            <motion.div className="mt-2 ms-2" whileHover={{
   scale: 1.02,

@@ -2,6 +2,7 @@
 import {motion} from 'framer-motion'
 import React from 'react';
 import useSWR from 'swr'
+import Image from 'next/image';
 import Link from 'next/link';
 const fetcher = async () => {
   const response = await fetch(`/api/Products`, {
@@ -41,7 +42,7 @@ let key=Object.keys(globaldata.datareq)
   }
 }} key={globaldata.datareq[ele].name} className="lg:w-64 mb-5  md:w-60 p-7 w-5/6 h-auto ms-8 sm:ml-2  sm:h-auto lg:me-10 xl:me-20 shadow-2xl border border-orange-300 ">
           <Link className="block relative rounded overflow-hidden cursor-pointer h-3/6" href={'/Hoodies/'+ globaldata.datareq[ele].slug}> 
-            <img alt="ecommerce" className="object-contain object-center w-auto sm:w-72 ps-16 md:w-full h-full block" src={globaldata.datareq[ele].image}/>
+          <Image  height={300} width={300} alt="ecommerce" className="object-contain object-center w-auto sm:w-72 ps-16 md:w-full h-full block" src={globaldata.datareq[ele].image}/>
           </Link>
           <div className="mt-4 h-1/6 w-auto mb-2">
             <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">{globaldata.datareq[ele].category}</h3>
