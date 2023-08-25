@@ -70,7 +70,7 @@ export default function Navbar() {
   return (
 
     <nav className='flex justify-between  flex-col sm:flex-row items-center box-border shadow-md py-3 sticky top-0 bg-slate-50  z-20 '>
-      <div className='ps-4 text-2xl bg-slate-100 text-[#FA5909] sm:static relative right-8 bottom-1 me-1'><Link onClick={router.refresh()} href={'/'}>𝓜𝓪𝓪𝓷𝓲-𝔀𝓮𝓪𝓻</Link></div>
+      <div className='ps-4 text-2xl bg-slate-100 text-[#FA5909] sm:static relative right-8 bottom-1 me-1'><Link  href={'/'}>𝓜𝓪𝓪𝓷𝓲-𝔀𝓮𝓪𝓻</Link></div>
       <ul className='flex sm:space-x-10 space-x-6 space-y-3 me-10 box-border h-10 '>
         <li></li>
         <Link className={`${path === '/' ? ' font-semibold  text-[#F95709] border-b-2 ' : ''} hover:border-b-2    md:text-base text-[#F95709] hover:text-[#F7600E] text-xs mb-4`} href='/'  ><motion.div whileHover={{
