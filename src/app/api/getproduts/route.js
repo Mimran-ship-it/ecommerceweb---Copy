@@ -1,7 +1,9 @@
-import connecttodatabase from '../../middleware/connection'
-import Product from '../../Collections/Product'
-
- const handler=async (req, res)=> {
+import connecttodatabase from '../../../db/connection'
+import Product from '../../../Collections/Product'
+import { NextResponse } from 'next/server';
+export const dynamic='force-dynamic'
+connecttodatabase()
+export async function GET(){
   
   const data = await Product.find();
     let datareq={}
@@ -36,8 +38,7 @@ datareq[name]={
       }
     })
 
-    res.status(200).json({ datareq });
+    return NextResponse.json({ datareq });
   
 }
 
-export default connecttodatabase(handler);

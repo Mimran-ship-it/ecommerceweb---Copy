@@ -5,7 +5,6 @@ email:{type:'String', required:true,unique:true},
 password:{type:'String', required:true},
 
 })
-
-    mongoose.models={}
-let Signup = mongoose.model('Signup',signupSchema);
-export default Signup ;
+mongoose.models={}
+const Signup=mongoose.model('Signup',signupSchema)
+export default Signup

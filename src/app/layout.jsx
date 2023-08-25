@@ -5,9 +5,11 @@ import { Inter } from 'next/font/google'
 import Navbar from './Component/Navbar'
 import Footer from './Component/Foter'
 import LoadingBar from 'react-top-loading-bar'
-import { useEffect,useState } from 'react';
+import { Suspense, useEffect,useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head'
+import Loading from './loading'
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,7 +26,7 @@ useEffect(() => {
 })
 
 
-  const router=useRouter()
+  const router=useRouter() 
   const [progress, setProgress] = useState(0)
   const [layoutUpdate, setLayoutUpdate] = useState(0);
   const [description, setDescription] = useState(' Elevate your bedroom décor with the finest bedsheets in Pakistan. Our exquisite collection of bedsheets offers a harmonious blend of comfort, style, and quality craftsmanship. Explore a diverse range of options that cater to various preferences, from vibrant colors to captivating patterns. Each bedsheets is designed to transform your sleeping space into a sanctuary of relaxation and elegance');
@@ -62,11 +64,13 @@ useEffect(() => {
         onLoaderFinished={() => setProgress(0)}
       />
         <Navbar  ></Navbar>
-        {children }
+        <Suspense fallback={<Loading/>}>
+        {children } 
+        </Suspense>
         <Footer></Footer>
 
         </CartProvider>
-
+<Toaster/>
         </body>
     </html>
   )

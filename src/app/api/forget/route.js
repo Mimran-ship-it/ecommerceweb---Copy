@@ -1,5 +1,7 @@
-import connectToDatabase from "../../middleware/connection";
-import Signup from "../../Collections/Signup";
+import connectToDatabase from "../../../db/connection";
+import Signup from "../../../Collections/Signup";
+import { NextResponse } from "next/server";
+connectToDatabase()
 // utils/emailService.js
 const nodemailer = require('nodemailer');
 
@@ -31,17 +33,18 @@ async function sendEmail(to, subject, text) {
 
 
 
-const handler=async (req, res)=> {
-  if (req.method === "POST") 
-  {console.log('jsjs',req.body.random)
+export async function POST(req){
+  let body=await req.json()
+  
+  console.log('jsjs',body.random)
     try {
       
-      let Req=await Signup.findOne({email:req.body.email})
+      let Req=await Signup.findOne({email:body.email})
       console.log(Req)
       if(Req){
-        let to=req.body.email
+        let to=body.email
         let Subject='Reset Password'
-        const token = req.body.random;
+        const token =body.random;
         let text=`Dear ${Req.name},
         If you've forgotten your Maani-Wear account password, don't worry! We're here to help you regain access to your account. Follow the steps below to reset your password:
         
@@ -60,16 +63,12 @@ const handler=async (req, res)=> {
        `
         sendEmail(to,Subject,text)
         
-        res.status(200).json({success:'ismatch'});
-    }else {res.status(200).json({success:false})}
+       return NextResponse.json({success:'ismatch'});
+    }else {return NextResponse.json({success:false})}
     } catch (error) {
     //   console.error("Error saving product:", error);
-      res.status(500).json({ok:error });
+     return NextResponse.json({ok:error });
     }
-  } else {
-    res.status(404).json({  });
-  }
+  
 }
 
-
-export default  connectToDatabase(handler)

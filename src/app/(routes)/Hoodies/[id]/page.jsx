@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import React from 'react'
 import { useCartContext } from "../../../../hooks/CartContext";
 import useSWR from 'swr'
+import { useToast } from "@/components/ui/use-toast"
 import Image from 'next/image';
 const fetcher = async () => {
   const response = await fetch(`/api/getproduts`, {
@@ -18,6 +19,7 @@ const fetcher = async () => {
 
 
 function Page({ params }) {
+  const { toast } = useToast()
   const router = useRouter()
   const { addToCart, buynow } = useCartContext()
   const [select, setselect] = useState(null)
@@ -62,18 +64,22 @@ function Page({ params }) {
 
   // .....................
 
+  const loadervariant={
+    animate:{y:[0,-100],transition:{type:'spring',y:{repeat:Infinity,duration:.4,ease:'easeOut'}}}
+  } 
   if (!fetchdata) {
-    // Handle loading state while data is being fetched
-    return     <div className='w-screen flex h-screen justify-center items-center'>
-    <span className='text-center block text-5xl font-sans text-gray-600'>loading....</span>
-  </div>;
+    // Handle loading state while dataz is being fetched
+    return <motion.div className='w-screen flex h-screen justify-center items-center'>
+    <motion.span variants={loadervariant} animate='animate'  className='block  shadow-2xl border w-16 h-16 bg-gray-600 rounded-full border-gray-600 m-auto'></motion.span>
+  </motion.div>
   }
+
   
 
   //.....................
 // console.log('blala',fetchdata.datareq)
   return (
-    <motion.div transition={{ delay: .1,stiffness: 200  }} initial={{ opacity: 0, scale: 0.5 }}  animate={{ x: 0, opacity: 1, scale: 1 }}>
+    <motion.div transition={{ delay: .1,stiffness: 200,type:'spring'  }} initial={{ opacity: 0, scale: 0.5 }}  animate={{ x: 0, opacity: 1, scale: 1 }}>
       {keys.map((ele) => {
         
 
@@ -171,7 +177,12 @@ function Page({ params }) {
                     return buynow(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, images, select, color)
                   }} disabled className={"bg-gray-300 text-white px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed ms-4 sm:text-sm text-xs "} >Buy now</button>}
                   {!checkCart && <button disabled onClick={() => { return addToCart(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, images, select, color) }} className={"bg-gray-300 text-white sm:py-2 sm:mx-6 mx-3 sm:text-sm text-xs  px-3  rounded-md disabled:opacity-50 disabled:cursor-not-allowed"}>Add to cart</button>}
-                  {checkCart && <button onClick={() => { return addToCart(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, images, select, color) }} className="mt-0 sm:text-sm text-xs text-white bg-indigo-500 border-0 sm:py-1 sm:mx-4 mx-2 sm:px-3  px-5  focus:outline-none hover:bg-indigo-600 rounded sm:text-base text-xs">Add to cart</button>}
+                  {checkCart && <button onClick={() => {
+                     toast({
+          title: "Added to Cart",
+          description: [fetchdata.datareq[ele].name],
+        })
+                     return addToCart(params.id, fetchdata.datareq[ele].name, fetchdata.datareq[ele].price, 1, images, select, color) }} className="mt-0 sm:text-sm text-xs text-white bg-indigo-500 border-0 sm:py-1 sm:mx-4 mx-2 sm:px-3  px-5  focus:outline-none hover:bg-indigo-600 rounded sm:text-base text-xs">Add to cart</button>}
                   <button className="rounded-full w-10 h-10 bg-gray-200 sm:py-2 sm:mx-6 mx-3  px-3 border-0 inline-flex sm:text-sm text-xs items-center justify-center text-gray-500  sm:text-base text-xs">
                     <svg fill="currentColor" strokeLinecap="round" strokeinejoin="round" className="w-5 h-5" viewBox="0 0 24 24">
                       <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
