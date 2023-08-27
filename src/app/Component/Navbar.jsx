@@ -1,12 +1,12 @@
 'use client'
 import { useRef, useState, useEffect } from "react";
-import { useCartContext } from "../../hooks/CartContext";
+import { useCartContext } from "../../hooks/CartContext"; 
 import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
 import { VscAccount } from "react-icons/vsc"
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion,AnimatePresence } from "framer-motion";
 import { AiFillCloseCircle, AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 
 export default function Navbar() {
@@ -15,7 +15,7 @@ export default function Navbar() {
   const router = useRouter()
   let path = usePathname()
   console.log(path)
-  const { cart, clearCart, totalcal, increment, decrement, Loggedin, getstatus } = useCartContext();
+  const { cart, clearCart, totalcal, increment, decrement, Loggedin, getstatus,color,setcolor } = useCartContext();
   const [Hover, setHover] = useState(false)
   useEffect(() => {
     console.log('cart in Navbar:', cart);
@@ -55,6 +55,7 @@ export default function Navbar() {
   useEffect(() => {
 
     Close()
+    setcolor(false)
 
   }, [path])
 
@@ -69,38 +70,39 @@ export default function Navbar() {
 
   return (
 
-    <nav className='flex justify-between  flex-col sm:flex-row items-center box-border shadow-md py-3 sticky top-0 bg-slate-50  z-20 '>
-      <div className='ps-4 text-2xl bg-slate-100 text-[#FA5909] sm:static relative right-8 bottom-1 me-1'><Link  href={'/'}>𝓜𝓪𝓪𝓷𝓲-𝔀𝓮𝓪𝓻</Link></div>
+    <nav className={`flex justify-between  flex-col sm:flex-row items-center box-border shadow-md py-3 sticky top-0   ${color?'bg-[#C82729] text-white':'bg-slate-50 text-[#FA5909]'}  z-20`} >
+      <div className='ps-4 text-2xl  sm:static relative right-8 bottom-1 me-1'><Link  href={'/'}>𝓜𝓪𝓪𝓷𝓲-𝔀𝓮𝓪𝓻</Link></div>
       <ul className='flex sm:space-x-10 space-x-6 space-y-3 me-10 box-border h-10 '>
         <li></li>
-        <Link className={`${path === '/' ? ' font-semibold  text-[#F95709] border-b-2 ' : ''} hover:border-b-2    md:text-base text-[#F95709] hover:text-[#F7600E] text-xs mb-4`} href='/'  ><motion.div whileHover={{
+        <Link className={`${path === '/' ? ' font-semibold   border-b-2 ' : ''}      md:text-base  hover:text-[#f7600ee6] text-xs mb-4`} href='/'  ><motion.div whileHover={{
   scale: 1.1,
   transition: {
     duration: .2
   }
 }}><li>Home</li></motion.div></Link>
-        <Link className={`${path === '/t-shirt' ? ' font-semibold  text-[#F7600E] border-b-2' : ''} hover:border-b-2   text-[#F95709] hover:text-[#F7600E] md:text-base text-xs mb-4`} href='/t-shirt'><motion.div whileHover={{
+        <Link className={`${path === '/t-shirt' ? ' font-semibold   border-b-2' : ''}      hover:text-[#F7600E] md:text-base text-xs mb-4`} href='/t-shirt'><motion.div whileHover={{
   scale: 1.1,
   transition: {
     duration: .2
   }
 }}><li>T-shirt</li></motion.div></Link>
-        <Link className={`${path == '/Hoodies' ? ' font-semibold text-[#F7600E]  border-b-2' : ''} hover:border-b-2   text-[#F95709] hover:text-[#F7600E] md:text-base text-xs mb-4`} href='/Hoodies'><motion.div whileHover={{
+        <Link className={`${path == '/Hoodies' ? ' font-semibold   border-b-2' : ''}      hover:text-[#F7600E] md:text-base text-xs mb-4`} href='/Hoodies'><motion.div whileHover={{
   scale: 1.1,
   transition: {
     duration: .2
   }
 }}><li>Hoodies</li></motion.div></Link>
-        <Link className={`${path == '/Pants' ? ' font-semibold  text-[#F7600E] border-b-2' : ''} hover:border-b-2   text-[#F95709] hover:text-[#F7600E] md:text-base text-xs mb-4`} href='/Pants'><motion.div whileHover={{
+        <Link className={`${path == '/Pants' ? ' font-semibold   border-b-2' : ''}      hover:text-[#F7600E] md:text-base text-xs mb-4`} href='/Pants'><motion.div whileHover={{
   scale: 1.1,
   transition: {
     duration: .2
   }
 }}><li>Pants</li></motion.div></Link>
       </ul>
-      <motion.div transition={{ delay: 0.1, stiffness: 200 }} // Animation properties
-              initial={{ x:isOpen? 100:100  }} // Initial state
-              animate={{ x: isOpen ? 0: 0, scale:isOpen? 1:0}} ref={shopcartonclick} className='pb-5 mt-5 shop-cart-onclick sm:w-96 w-screen shadow-lg fixed right-0 top-0 bottom-0 hidden bg-slate-100 h-auto rounded-lg z-40 overflow-y-auto '>
+      <>
+      <motion.div  transition={{ delay: 0.1, stiffness: 50,type:'spring',damping:7,mass:.3 }} // Animation properties
+              initial={{ x:isOpen? 100:0  }} // Initial state
+              animate={{ x: isOpen ? 0: 0, scale:isOpen? 1:0}}   ref={shopcartonclick} className='pb-5 text-black mt-0 pt-3 shop-cart-onclick sm:w-96 w-screen shadow-lg fixed right-0 top-0 bottom-0 origin-top-right hidden bg-slate-100 h-auto rounded-lg z-40 overflow-y-auto '>
         <AiFillCloseCircle onClick={Close} className='fixed inline text-2xl hover text-slate-900 ms-2' />
         <span className='inline md:ps-24 m-auto ps-10  font-mono font-semibold sm:text-2xl text-lg mt-7  '>In Your Bag</span>
         <hr className='mt-3 border-black' />
@@ -110,7 +112,7 @@ export default function Navbar() {
           {/* <span>Name</span> */}
         </div>}
 
-        <motion.div initial={{ opacity: 0, scale: 0.5 }}  animate={{ x: 0, opacity: 1, scale: 1 }} className=" flex-col mb-20 sm:ms-5 ms-6 me-10 font-semibold mt-4 ">
+        <motion.div  initial={{ opacity: 0, scale: 0.5 }}  animate={{ x: 0, opacity: 1, scale: 1 }} className=" flex-col mb-20 sm:ms-5 ms-6 me-10 font-semibold mt-4 ">
           <div className="list-none">
             {key.length != 0 ? (
               <div
@@ -133,8 +135,9 @@ export default function Navbar() {
           <Link href={`/Checkout`}> <button className="mt-0 text-white bg-[#FA5909] border-0 py-1 sm:py-2 sm:mx-2 mx-3  px-3  focus:outline-none hover:bg-orange-600  rounded sm:text-base text-sm" >Checkout</button></Link>
         </div>}
       </motion.div>
+      </>
       <div ref={shopcartoffclick} className='flex items-center justify-between shop-cart-offclick text-sm md:text-base sm:static absolute right-3 sm:top-2 top-3  sm:pe-10 pe-2 '>{Loggedin && <span onMouseLeave={() => { return setHover(false) }} onMouseEnter={() => { return setHover(true) }} className=" h-10 sm:w-16 w-10  flex items-center justify-center text-center">
-        <VscAccount className="sm:text-2xl text-base text-[#FA5909] mx-3" />
+        <VscAccount className="sm:text-2xl text-base  mx-3" />
         {Hover && <div className="border z-50 rounded-lg bg-slate-100 shadow-xl sm:w-32 w-24 sm:absolute absolute top-7 right-12 sm:text-base text-xs sm:top-10 sm:right-24">
           <ul className="flex flex-col justify-start items-start ps-2 text-gray-600">
             <li className="my-2 cursor-pointer hover:text-black"><Link href={'/MyAccount'}>My Account</Link></li>
@@ -144,8 +147,8 @@ export default function Navbar() {
         </div>}
       </span>}
         <Link href={`/Signin`}>
-          {!Loggedin && <button className="border hover:bg-orange-600 bg-[#FA5909] text-xs sm:text-sm p-1 sm:px-2 rounded-xl text-white" >Login</button>}</Link><span className="sm:bg-orange-500 text-xs absolute sm:top-2 top-0 sm:border border-orange-300 rounded-full sm:right-8  right-0 sm:w-5 w-3 sm:text-white
-          text-orange-600 sm:font-normal sm:ps-0 ps-1 text-center" >{key.length}</span><motion.div whileHover={{
+          {!Loggedin && <button className={`border hover:bg-orange-600 bg-[#FA5909] text-xs sm:text-sm p-1 sm:px-2 ${color?' bg-transparent hover:font-bold border-none':'hover:bg-orange-600 bg-[#FA5909]'} rounded-xl text-white`} >Login</button>}</Link><span className={` text-xs absolute sm:top-2 top-0 sm:border border-orange-300 sm:bg-orange-500 rounded-full ${color?'!bg-transparent border-none text-white sm:font-bold':'sm:bg-orange-500'}  sm:right-8  right-0 sm:w-5 w-3 sm:text-white
+          text-orange-600 sm:font-normal sm:ps-0 ps-1 text-center`} >{key.length}</span><motion.div whileHover={{
   scale: 1.05,
   transition: {
     duration: .2
@@ -157,7 +160,7 @@ export default function Navbar() {
       onClick={Open}
     >
       <FiShoppingCart
-        className={`sm:text-2xl text-base text-[#F7600E] cursor-pointer text-${isOpen ? 'blue' : '#FA5909'}`}
+        className={`sm:text-2xl text-base text-[#F7600E] ${color?' text-white':'text-[#F7600E]'} cursor-pointer text-${isOpen ? 'blue' : '#FA5909'}`}
       />
     </motion.div>
 </motion.div>

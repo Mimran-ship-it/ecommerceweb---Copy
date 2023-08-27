@@ -4,7 +4,7 @@ const useCart = () => {
   const [cart, setCart] = useState({});
   const [Loggedin, setLoggedin] = useState(false);
   const [random, setrandom] = useState('');
-  
+  const [color, setcolor] = useState(false)
   const clearCart = () => {
     localStorage.removeItem("cart");
     setCart({});
@@ -106,7 +106,7 @@ count=false
     }
 }, []);
 
-  return { cart, addToCart, clearCart,totalcal ,increment,decrement,buynow,Loggedin,getstatus,random};
+  return { cart, addToCart, clearCart,totalcal ,increment,decrement,buynow,Loggedin,getstatus,random,color,setcolor};
 };
 
 export default useCart;
