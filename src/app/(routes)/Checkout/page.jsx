@@ -115,7 +115,7 @@ setinvalidcredential(true)
 
   //
   return (
-    <motion.div transition={{ delay: .1,stiffness: 200 }} initial={{ opacity: 0, x:200, scale:0  }} animate={{scale:1, x: 0, opacity: 1, scale: 1}} className='min-h-[100vh]'>
+    <motion.div transition={{ delay: .6,stiffness: 100,type:'tween' }} initial={{ opacity: 0, x:200, scale:0  }} animate={{scale:1, x: 0, opacity: 1, scale: 1}} className='min-h-[100vh]'>
     {Object.keys(cart).length==0 &&<><h1 className=' mt-14 flex flex-col items-center justify-center text-center   font-mono sm:text-2xl text-lg mx-2 '>Your Cart is empty <Link href={'/t-shirt'} className='text-blue-500 hover:underline mt-4 '>Choose from a variety of t-shirts</Link ><Link href={'/Hoodies'} className='text-blue-500 hover:underline  '>Choose from a variety of Hoodies</Link ><Link href={'/Pants'} className='text-blue-500 hover:underline  '>Choose from a variety of Pants</Link ></h1></>}
     {Object.keys(cart).length!=0 && <div className='overflow-x-hidden '>
 

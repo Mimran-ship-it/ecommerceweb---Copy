@@ -100,7 +100,7 @@ export default function Navbar() {
 }}><li>Pants</li></motion.div></Link>
       </ul>
       <>
-      <motion.div  transition={{ delay: 0.1, stiffness: 50,type:'spring',damping:7,mass:.3 }} // Animation properties
+      <motion.div  transition={{ delay: 0.6, stiffness: 50,type:'spring',damping:7,mass:.3 }} // Animation properties
               initial={{ x:isOpen? 100:0  }} // Initial state
               animate={{ x: isOpen ? 0: 0, scale:isOpen? 1:0}}   ref={shopcartonclick} className='pb-5 text-black mt-0 pt-3 shop-cart-onclick sm:w-96 w-screen shadow-lg fixed right-0 top-0 bottom-0 origin-top-right hidden bg-slate-100 h-auto rounded-lg z-40 overflow-y-auto '>
         <AiFillCloseCircle onClick={Close} className='fixed inline text-2xl hover text-slate-900 ms-2' />

@@ -32,7 +32,7 @@ let key=Object.keys(globaldata.datareq)
 console.log('sisi',key)
     return (  
       <motion.div
-        initial={{ opacity: 0, x:200   }}  animate={{ x : 0, opacity: 1, scale: 1}} transition={{ delay: 0,duration:.6,stiffness: 70,type:'spring' }} >
+        initial={{ opacity: 0, x:200   }}  animate={{ x : 0, opacity: 1, scale: 1}} transition={{ delay: .6,stiffness: 70,type:'spring' }} >
         <Head>
         <title>My page title</title>
       </Head>

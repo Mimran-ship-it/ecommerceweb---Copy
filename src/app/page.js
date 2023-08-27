@@ -69,7 +69,7 @@ export default function Home() {
 
       <div  className=' box-border z-40 bg-white' >
         <section ref={ref} className="text-gray-600 body-font">
-          {inView&& <motion.div initial={{ opacity: 0, x: 200,scale:0,rotate:30 }} transition={{ type:'tween',duration:.9, stiffness: 50 }} animate={{ x: 0,rotate:0, opacity: 1, scale: 1 }}  className="container px-5 py-24 mx-auto">
+          {inView&& <motion.div initial={{ opacity: 0, x: 200,scale:0,rotate:30 }} transition={{ type:'tween',duration:.4,delay: 0.4, stiffness: 50 }} animate={{ x: 0,rotate:0, opacity: 1, scale: 1 }}  className="container px-5 py-24 mx-auto">
             {fetchdata&&key.current.length!=0&& <div className="border p-4 justify-center items-center shadow-2xl bg-gray-50 flex sm:flex-row flex-col w-full sm:w-9/12 h-96 m-auto box-border"><motion.div whileHover={{
   scale: 1.03,
   transition: {
@@ -80,7 +80,7 @@ export default function Home() {
            <motion.div className="mt-2 ms-2" whileHover={{
   scale: 1.02,
   transition: {
-    duration: .2
+  duration: .2
   }
 }}> <Link href={`/${fetchdata.datareq[key.current[random]].category}`}> <h1 className="font-mono md:text-lg text-base md:w-80 w-auto whitespace-pre-wrap">{key.current[random]}</h1></Link></motion.div>
             

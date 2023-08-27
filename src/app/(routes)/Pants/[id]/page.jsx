@@ -79,7 +79,7 @@ function Page({ params }) {
   //.....................
 // console.log('blala',fetchdata.datareq)
   return (
-    <motion.div transition={{ delay: .1,stiffness: 200,type:'spring'  }} initial={{ opacity: 0, scale: 0.5 }}  animate={{ x: 0, opacity: 1, scale: 1 }}>
+    <motion.div transition={{ delay: 0.6,stiffness: 100,type:'spring'  }} initial={{ opacity: 0, scale: 0.5 }}  animate={{ x: 0, opacity: 1, scale: 1 }}>
       {keys.map((ele) => {
         
 

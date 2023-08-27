@@ -43,7 +43,7 @@ const data={name,email,password}
 }
 
 
-  return (<motion.div transition={{ delay: .1,stiffness: 200  }} initial={{ opacity: 0, x:200  }}  animate={{ x: 0, opacity: 1, scale: 1}} className='min-h-[100vh]'>
+  return (<motion.div transition={{ delay: .5,stiffness: 200  }} initial={{ opacity: 0, x:200  }}  animate={{ x: 0, opacity: 1, scale: 1}} className='min-h-[100vh]'>
     {
     Loggedin && <><h1 className=' my-14  text-center  hover:font-normal text-2xl '>you are logged in <Link href={'/'} className='text-blue-500 hover:border-b-blue-500 hover:border-b '>Go to home</Link ></h1></>
     

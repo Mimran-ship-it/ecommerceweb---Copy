@@ -33,7 +33,7 @@ let key=Object.keys(globaldata.datareq)
 
     return (  
       <motion.div
-        initial={{ opacity: 0, x:200   }}  animate={{ x : 0, opacity: 1, scale: 1}} transition={{ delay: 0,duration:.4,stiffness: 70,type:'spring' }}>
+        initial={{ opacity: 0, x:200   }}  animate={{ x : 0, opacity: 1, scale: 1}} transition={{ delay: .6,duration:.4,stiffness: 70,type:'spring' }}>
         <section className="text-gray-600 body-font lg:ms-36">
     <div  className="container px-5 py-24 mx-auto">
       <div className="flex flex-wrap -m-4">
